@@ -9,12 +9,12 @@ def index():
     user = {'username': 'Damian'}
     posts = [
         {
-            'author': {'username': 'John'},
-            'body': 'What a beautiful day!'
+            'author': {'username': 'User 1'},
+            'body': 'Pierwszy przykładowy post'
         },
         {
-            'author': {'username': 'Susan'},
-            'body': 'Had a great coffee this morning!'
+            'author': {'username': 'User 2'},
+            'body': 'Drugi przykładowy post'
         }
     ]
     return render_template('index.html', title="Home", user=user, posts=posts)
