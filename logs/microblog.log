@@ -1,40 +1,94 @@
-2019-04-07 16:56:23,851 INFO: Microblog startup [in C:\Uczelnia\microblog\app\__init__.py:48]
-2019-04-07 17:04:30,221 INFO: Microblog startup [in C:\Uczelnia\microblog\app\__init__.py:48]
-2019-04-07 17:15:37,281 INFO: Microblog startup [in C:\Uczelnia\microblog\app\__init__.py:48]
-2019-04-07 17:16:27,444 INFO: Microblog startup [in C:\Uczelnia\microblog\app\__init__.py:48]
-2019-04-07 17:35:20,541 INFO: Microblog startup [in C:\Uczelnia\microblog\app\__init__.py:48]
-2019-04-07 17:42:22,604 INFO: Microblog startup [in C:\Uczelnia\microblog\app\__init__.py:48]
-2019-04-07 17:43:43,037 INFO: Microblog startup [in C:\Uczelnia\microblog\app\__init__.py:48]
-2019-04-08 17:12:02,434 INFO: Microblog startup [in C:\Users\ArtokV\Desktop\ProjektFlacha\microblog-flask\app\__init__.py:48]
-2019-04-08 17:12:16,709 INFO: Microblog startup [in C:\Users\ArtokV\Desktop\ProjektFlacha\microblog-flask\app\__init__.py:48]
-2019-04-08 18:59:11,523 INFO: Microblog startup [in C:\Uczelnia\microblog\app\__init__.py:48]
-2019-04-08 19:09:33,557 INFO: Microblog startup [in C:\Uczelnia\microblog\app\__init__.py:48]
-2019-04-08 19:10:48,679 INFO: Microblog startup [in C:\Uczelnia\microblog\app\__init__.py:48]
-2019-04-08 19:10:56,711 INFO: Microblog startup [in C:\Uczelnia\microblog\app\__init__.py:48]
-2019-04-08 20:27:58,510 INFO: Microblog startup [in C:\Uczelnia\microblog\app\__init__.py:48]
-2019-04-08 20:28:54,770 INFO: Microblog startup [in C:\Uczelnia\microblog\app\__init__.py:48]
-2019-04-08 20:29:04,346 INFO: Microblog startup [in C:\Uczelnia\microblog\app\__init__.py:48]
-2019-04-08 20:29:26,963 INFO: Microblog startup [in C:\Uczelnia\microblog\app\__init__.py:48]
-2019-04-08 20:29:56,619 INFO: Microblog startup [in C:\Uczelnia\microblog\app\__init__.py:48]
-2019-04-08 20:32:19,850 INFO: Microblog startup [in C:\Uczelnia\microblog\app\__init__.py:48]
-2019-04-08 20:40:56,309 INFO: Microblog startup [in C:\Uczelnia\microblog\app\__init__.py:48]
-2019-04-08 20:41:31,210 INFO: Microblog startup [in C:\Uczelnia\microblog\app\__init__.py:48]
-2019-04-08 20:41:59,511 INFO: Microblog startup [in C:\Uczelnia\microblog\app\__init__.py:48]
-2019-04-08 20:43:58,207 INFO: Microblog startup [in C:\Uczelnia\microblog\app\__init__.py:48]
-2019-04-08 20:46:29,608 INFO: Microblog startup [in C:\Uczelnia\microblog\app\__init__.py:48]
-2019-04-08 20:46:59,263 INFO: Microblog startup [in C:\Uczelnia\microblog\app\__init__.py:48]
-2019-04-08 20:47:10,767 INFO: Microblog startup [in C:\Uczelnia\microblog\app\__init__.py:48]
-2019-04-08 20:47:24,300 INFO: Microblog startup [in C:\Uczelnia\microblog\app\__init__.py:48]
-2019-04-08 20:49:36,482 INFO: Microblog startup [in C:\Uczelnia\microblog\app\__init__.py:48]
-2019-04-08 21:00:17,867 INFO: Microblog startup [in C:\Uczelnia\microblog\app\__init__.py:48]
-2019-04-08 21:00:31,283 INFO: Microblog startup [in C:\Uczelnia\microblog\app\__init__.py:48]
-2019-04-08 21:00:42,704 INFO: Microblog startup [in C:\Uczelnia\microblog\app\__init__.py:48]
-2019-04-08 21:01:05,960 INFO: Microblog startup [in C:\Uczelnia\microblog\app\__init__.py:48]
-2019-04-08 21:01:14,395 INFO: Microblog startup [in C:\Uczelnia\microblog\app\__init__.py:48]
-2019-04-08 21:01:36,708 INFO: Microblog startup [in C:\Uczelnia\microblog\app\__init__.py:48]
-2019-04-08 21:02:14,115 INFO: Microblog startup [in C:\Uczelnia\microblog\app\__init__.py:48]
-2019-04-08 21:02:22,891 INFO: Microblog startup [in C:\Uczelnia\microblog\app\__init__.py:48]
-2019-04-08 21:04:21,738 INFO: Microblog startup [in C:\Uczelnia\microblog\app\__init__.py:48]
-2019-04-08 21:04:39,271 INFO: Microblog startup [in C:\Uczelnia\microblog\app\__init__.py:48]
-2019-04-08 21:05:29,705 INFO: Microblog startup [in C:\Uczelnia\microblog\app\__init__.py:48]
-2019-04-08 21:06:45,187 INFO: Microblog startup [in C:\Uczelnia\microblog\app\__init__.py:48]
+2019-04-10 12:46:01,750 ERROR: Exception on /user/damian [GET] [in c:\uczelnia\microblog\venv\lib\site-packages\flask\app.py:1761]
+Traceback (most recent call last):
+  File "c:\uczelnia\microblog\venv\lib\site-packages\flask\app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "c:\uczelnia\microblog\venv\lib\site-packages\flask\app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "c:\uczelnia\microblog\venv\lib\site-packages\flask\app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "c:\uczelnia\microblog\venv\lib\site-packages\flask\_compat.py", line 35, in reraise
+    raise value
+  File "c:\uczelnia\microblog\venv\lib\site-packages\flask\app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "c:\uczelnia\microblog\venv\lib\site-packages\flask\app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "c:\uczelnia\microblog\venv\lib\site-packages\flask_login\utils.py", line 261, in decorated_view
+    return func(*args, **kwargs)
+  File "C:\Uczelnia\microblog\app\routes.py", line 69, in user
+    return render_template('user.html', user=user, posts=posts, title=username+'\'s Profile')
+  File "c:\uczelnia\microblog\venv\lib\site-packages\flask\templating.py", line 135, in render_template
+    context, ctx.app)
+  File "c:\uczelnia\microblog\venv\lib\site-packages\flask\templating.py", line 117, in _render
+    rv = template.render(context)
+  File "c:\uczelnia\microblog\venv\lib\site-packages\jinja2\asyncsupport.py", line 76, in render
+    return original_render(self, *args, **kwargs)
+  File "c:\uczelnia\microblog\venv\lib\site-packages\jinja2\environment.py", line 1008, in render
+    return self.environment.handle_exception(exc_info, True)
+  File "c:\uczelnia\microblog\venv\lib\site-packages\jinja2\environment.py", line 780, in handle_exception
+    reraise(exc_type, exc_value, tb)
+  File "c:\uczelnia\microblog\venv\lib\site-packages\jinja2\_compat.py", line 37, in reraise
+    raise value.with_traceback(tb)
+  File "C:\Uczelnia\microblog\app\templates\user.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "C:\Uczelnia\microblog\app\templates\base.html", line 30, in top-level template code
+    {% block content %}{% endblock %}
+  File "C:\Uczelnia\microblog\app\templates\user.html", line 25, in block "content"
+    {% include '_post.html' %}
+  File "C:\Uczelnia\microblog\app\templates\_post.html", line 5, in top-level template code
+    <p><a href="{{ url_for('user/{{ user.username }}', username=user.username) }}">{{ username }}</a></p>
+  File "c:\uczelnia\microblog\venv\lib\site-packages\flask\helpers.py", line 356, in url_for
+    return appctx.app.handle_url_build_error(error, endpoint, values)
+  File "c:\uczelnia\microblog\venv\lib\site-packages\flask\app.py", line 2061, in handle_url_build_error
+    reraise(exc_type, exc_value, tb)
+  File "c:\uczelnia\microblog\venv\lib\site-packages\flask\_compat.py", line 35, in reraise
+    raise value
+  File "c:\uczelnia\microblog\venv\lib\site-packages\flask\helpers.py", line 345, in url_for
+    force_external=external)
+  File "c:\uczelnia\microblog\venv\lib\site-packages\werkzeug\routing.py", line 1776, in build
+    raise BuildError(endpoint, values, method, self)
+werkzeug.routing.BuildError: Could not build url for endpoint 'user/{{ user.username }}' with values ['username']. Did you mean 'user' instead?
+2019-04-10 12:46:03,101 ERROR: Exception on /index [GET] [in c:\uczelnia\microblog\venv\lib\site-packages\flask\app.py:1761]
+Traceback (most recent call last):
+  File "c:\uczelnia\microblog\venv\lib\site-packages\flask\app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "c:\uczelnia\microblog\venv\lib\site-packages\flask\app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "c:\uczelnia\microblog\venv\lib\site-packages\flask\app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "c:\uczelnia\microblog\venv\lib\site-packages\flask\_compat.py", line 35, in reraise
+    raise value
+  File "c:\uczelnia\microblog\venv\lib\site-packages\flask\app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "c:\uczelnia\microblog\venv\lib\site-packages\flask\app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "c:\uczelnia\microblog\venv\lib\site-packages\flask_login\utils.py", line 261, in decorated_view
+    return func(*args, **kwargs)
+  File "C:\Uczelnia\microblog\app\routes.py", line 22, in index
+    return render_template('index.html', title="Home", form=form, posts=posts)
+  File "c:\uczelnia\microblog\venv\lib\site-packages\flask\templating.py", line 135, in render_template
+    context, ctx.app)
+  File "c:\uczelnia\microblog\venv\lib\site-packages\flask\templating.py", line 117, in _render
+    rv = template.render(context)
+  File "c:\uczelnia\microblog\venv\lib\site-packages\jinja2\asyncsupport.py", line 76, in render
+    return original_render(self, *args, **kwargs)
+  File "c:\uczelnia\microblog\venv\lib\site-packages\jinja2\environment.py", line 1008, in render
+    return self.environment.handle_exception(exc_info, True)
+  File "c:\uczelnia\microblog\venv\lib\site-packages\jinja2\environment.py", line 780, in handle_exception
+    reraise(exc_type, exc_value, tb)
+  File "c:\uczelnia\microblog\venv\lib\site-packages\jinja2\_compat.py", line 37, in reraise
+    raise value.with_traceback(tb)
+  File "C:\Uczelnia\microblog\app\templates\index.html", line 1, in top-level template code
+    {% extends "base.html" %}
+  File "C:\Uczelnia\microblog\app\templates\base.html", line 30, in top-level template code
+    {% block content %}{% endblock %}
+  File "C:\Uczelnia\microblog\app\templates\index.html", line 19, in block "content"
+    {% include '_post.html' %}
+  File "C:\Uczelnia\microblog\app\templates\_post.html", line 5, in top-level template code
+    <p><a href="{{ url_for('user/{{ user.username }}', username=user.username) }}">{{ username }}</a></p>
+  File "c:\uczelnia\microblog\venv\lib\site-packages\jinja2\environment.py", line 430, in getattr
+    return getattr(obj, attribute)
+jinja2.exceptions.UndefinedError: 'user' is undefined
+2019-04-10 12:48:08,199 INFO: Microblog startup [in C:\Uczelnia\microblog\app\__init__.py:48]
+2019-04-10 12:48:55,809 INFO: Microblog startup [in C:\Uczelnia\microblog\app\__init__.py:48]
+2019-04-10 12:50:05,243 INFO: Microblog startup [in C:\Uczelnia\microblog\app\__init__.py:48]
+2019-04-10 12:50:14,769 INFO: Microblog startup [in C:\Uczelnia\microblog\app\__init__.py:48]
