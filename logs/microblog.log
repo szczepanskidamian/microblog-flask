@@ -92,3 +92,36 @@ jinja2.exceptions.UndefinedError: 'user' is undefined
 2019-04-10 12:48:55,809 INFO: Microblog startup [in C:\Uczelnia\microblog\app\__init__.py:48]
 2019-04-10 12:50:05,243 INFO: Microblog startup [in C:\Uczelnia\microblog\app\__init__.py:48]
 2019-04-10 12:50:14,769 INFO: Microblog startup [in C:\Uczelnia\microblog\app\__init__.py:48]
+2019-04-11 00:36:59,757 INFO: Microblog startup [in C:\Uczelnia\microblog\app\__init__.py:48]
+2019-04-11 00:37:10,912 ERROR: Exception on /user/damian [GET] [in c:\uczelnia\microblog\venv\lib\site-packages\flask\app.py:1761]
+Traceback (most recent call last):
+  File "c:\uczelnia\microblog\venv\lib\site-packages\sqlalchemy\orm\base.py", line 399, in _entity_descriptor
+    return getattr(entity, key)
+AttributeError: type object 'Post' has no attribute 'username'
+
+During handling of the above exception, another exception occurred:
+
+Traceback (most recent call last):
+  File "c:\uczelnia\microblog\venv\lib\site-packages\flask\app.py", line 2292, in wsgi_app
+    response = self.full_dispatch_request()
+  File "c:\uczelnia\microblog\venv\lib\site-packages\flask\app.py", line 1815, in full_dispatch_request
+    rv = self.handle_user_exception(e)
+  File "c:\uczelnia\microblog\venv\lib\site-packages\flask\app.py", line 1718, in handle_user_exception
+    reraise(exc_type, exc_value, tb)
+  File "c:\uczelnia\microblog\venv\lib\site-packages\flask\_compat.py", line 35, in reraise
+    raise value
+  File "c:\uczelnia\microblog\venv\lib\site-packages\flask\app.py", line 1813, in full_dispatch_request
+    rv = self.dispatch_request()
+  File "c:\uczelnia\microblog\venv\lib\site-packages\flask\app.py", line 1799, in dispatch_request
+    return self.view_functions[rule.endpoint](**req.view_args)
+  File "c:\uczelnia\microblog\venv\lib\site-packages\flask_login\utils.py", line 261, in decorated_view
+    return func(*args, **kwargs)
+  File "C:\Uczelnia\microblog\app\routes.py", line 69, in user
+    posts = Post.query.filter_by(username=username).all()
+  File "c:\uczelnia\microblog\venv\lib\site-packages\sqlalchemy\orm\query.py", line 1792, in filter_by
+    for key, value in kwargs.items()
+  File "c:\uczelnia\microblog\venv\lib\site-packages\sqlalchemy\orm\query.py", line 1792, in <listcomp>
+    for key, value in kwargs.items()
+  File "c:\uczelnia\microblog\venv\lib\site-packages\sqlalchemy\orm\base.py", line 402, in _entity_descriptor
+    "Entity '%s' has no property '%s'" % (description, key)
+sqlalchemy.exc.InvalidRequestError: Entity '<class 'app.models.Post'>' has no property 'username'
