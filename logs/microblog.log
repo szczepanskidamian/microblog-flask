@@ -125,3 +125,11 @@ Traceback (most recent call last):
   File "c:\uczelnia\microblog\venv\lib\site-packages\sqlalchemy\orm\base.py", line 402, in _entity_descriptor
     "Entity '%s' has no property '%s'" % (description, key)
 sqlalchemy.exc.InvalidRequestError: Entity '<class 'app.models.Post'>' has no property 'username'
+2019-04-11 08:58:06,553 INFO: Microblog startup [in C:\Uczelnia\microblog\app\__init__.py:48]
+2019-04-11 08:59:18,262 INFO: Microblog startup [in C:\Uczelnia\microblog\app\__init__.py:48]
+2019-04-11 11:37:56,696 INFO: Microblog startup [in C:\Uczelnia\microblog\app\__init__.py:48]
+2019-04-11 11:40:45,691 INFO: Microblog startup [in C:\Uczelnia\microblog\app\__init__.py:48]
+2019-04-11 11:56:47,327 INFO: Microblog startup [in C:\Uczelnia\microblog\app\__init__.py:48]
+2019-04-11 12:02:08,691 INFO: Microblog startup [in C:\Uczelnia\microblog\app\__init__.py:48]
+2019-04-11 19:06:45,701 INFO: Microblog startup [in C:\Uczelnia\microblog\app\__init__.py:48]
+2019-04-11 19:14:40,229 INFO: Microblog startup [in C:\Uczelnia\microblog\app\__init__.py:48]

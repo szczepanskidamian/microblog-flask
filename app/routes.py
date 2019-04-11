@@ -22,6 +22,20 @@ def index():
     return render_template('index.html', title="Home", form=form, posts=posts)
 
 
+@app.route('/explore', methods=['GET'])
+@login_required
+def explore():
+    form = PostForm()
+    if form.validate_on_submit():
+        post = Post(body=form.post.data, author=current_user)
+        db.session.add(post)
+        db.session.commit()
+        flash('Succesfully added a post!')
+        return redirect(url_for('explore'))
+    posts = Post.query.order_by(Post.timestamp.desc()).all()
+    return render_template('index.html', title="Home", form=form, posts=posts)
+
+
 @app.route('/login', methods=['GET', 'POST'])
 def login():
     if current_user.is_authenticated:
@@ -65,7 +79,7 @@ def register():
 @login_required
 def user(username):
     user = User.query.filter_by(username=username).first_or_404()
-    posts = Post.query.filter_by(user_id=user.id).all()
+    posts = Post.query.filter_by(user_id=user.id).order_by(Post.timestamp.desc()).all()
     return render_template('user.html', user=user, posts=posts, title=username+'\'s Profile')
 
 
@@ -91,6 +105,7 @@ def edit_profile():
         form.about_me.data = current_user.about_me
     return render_template('edit_profile.html', title='Edit Profile', form=form)
 
+
 @app.route('/follow/<username>')
 @login_required
 def follow(username):
@@ -106,6 +121,7 @@ def follow(username):
     flash('You are following {}!'.format(username))
     return redirect(url_for('user', username=username))
 
+
 @app.route('/unfollow/<username>')
 @login_required
 def unfollow(username):
@@ -120,4 +136,5 @@ def unfollow(username):
     db.session.commit()
     flash('You are not following {}.'.format(username))
     return redirect(url_for('user', username=username))
+
 
