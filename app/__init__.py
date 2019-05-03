@@ -8,6 +8,7 @@ import os
 from flask_bootstrap import Bootstrap
 from flask_moment import Moment
 from config import Config
+from flask_mail import Mail
 
 
 app = Flask(__name__)
