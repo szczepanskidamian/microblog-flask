@@ -4,27 +4,34 @@ from app import app, db
 from app.models import User, Post
 
 class UserModelCase(unittest.TestCase):
+    """Podstawowe testy jednostkowe aplikacji."""
+
     def setUp(self):
+        """Stworzenie tymczasowej bazy danych służącej do testów."""
         app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite://'
         db.create_all()
 
     def tearDown(self):
+        """Usunięcie tymczasowej bazy danych służącej do testów."""
         db.session.remove()
         db.drop_all()
 
     def test_password_hashing(self):
+        """Testowanie funkcjonalności hashowania haseł."""
         u = User(username='susan')
         u.set_password('cat')
         self.assertFalse(u.check_password('dog'))
         self.assertTrue(u.check_password('cat'))
 
     def test_avatar(self):
+        """Testowanie generowania avataru na podstawie adersu e-mail z użyciem serwisu gravatar.com."""
         u = User(username='john', email='john@example.com')
         self.assertEqual(u.avatar(128), ('https://www.gravatar.com/avatar/'
                                          'd4c74594d841139328695756648b6bd6'
                                          '?d=identicon&s=128'))
 
     def test_follow(self):
+        """Testowanie funkcjonalności obserwowania użytkowników."""
         u1 = User(username='john', email='john@example.com')
         u2 = User(username='susan', email='susan@example.com')
         db.session.add(u1)
@@ -48,7 +55,8 @@ class UserModelCase(unittest.TestCase):
         self.assertEqual(u2.followers.count(), 0)
 
     def test_follow_posts(self):
-        # usersi
+        """Testowanie funkcjonalności wyświetlania postów obserwowanych użytkowników."""
+        # użytkownicy
         u1 = User(username='john', email='john@example.com')
         u2 = User(username='susan', email='susan@example.com')
         u3 = User(username='mary', email='mary@example.com')
