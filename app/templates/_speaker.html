@@ -1,0 +1,16 @@
+    <table class="table table-hover">
+        <tr>
+            <td width="30px">
+                <a href="{{ url_for('conversation', username=speaker.username) }}">
+                    <img src="{{ speaker.avatar(30) }}" />
+                </a>
+            </td>
+            <td>
+                    <span class="user_popup">
+                        <a href="{{ url_for('conversation', username=speaker.username) }}">
+                            {{ speaker.username }}
+                        </a>
+                    </span>
+            </td>
+        </tr>
+    </table>

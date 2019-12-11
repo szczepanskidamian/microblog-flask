@@ -30,8 +30,8 @@
                     </a>
                     {% endif %}
                                 <p>
-                    <a href="{{ url_for('send_message',
-                                        recipient=user.username) }}">
+                    <a href="{{ url_for('conversation',
+                                        username=user.username) }}">
                         {{ _('Send private message') }}
                     </a>
                 </p>

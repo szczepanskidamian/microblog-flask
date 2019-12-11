@@ -14,6 +14,7 @@ from flask_babel import _, get_locale
 @app.route('/index', methods=['GET', 'POST'])
 @login_required
 def index():
+    """Funkcja wyświetlająca strone główną aplikacji wraz z postami obserwowanych użytkowników."""
     form = PostForm()
     if form.validate_on_submit():
         post = Post(body=form.post.data, author=current_user)
@@ -36,6 +37,7 @@ def index():
 @app.route('/explore', methods=['GET'])
 @login_required
 def explore():
+    """Funkcja wyświetlająca strone główną aplikacji wraz z postami wszystkich użytkowników."""
     form = PostForm()
     if form.validate_on_submit():
         post = Post(body=form.post.data, author=current_user)
@@ -57,6 +59,7 @@ def explore():
 
 @app.route('/login', methods=['GET', 'POST'])
 def login():
+    """Funkcja wyświetlająca formularz logowania."""
     if current_user.is_authenticated:
         return redirect(url_for('index'))
     form = LoginForm()
@@ -75,12 +78,14 @@ def login():
 
 @app.route('/logout')
 def logout():
+    """Funkcja odpowiadająca za wylogowanie użytkownika z aplikacji."""
     logout_user()
     return redirect(url_for('index'))
 
 
 @app.route('/register', methods=['GET', 'POST'])
 def register():
+    """Funkcja wyświetlająca formularz rejestracji użytkownika."""
     if current_user.is_authenticated:
         return redirect(url_for('index'))
     form = RegistrationForm()
@@ -96,6 +101,7 @@ def register():
 
 @app.route('/reset_password_request', methods=['GET', 'POST'])
 def reset_password_request():
+    """Funkcja wyświetlająca formularz z żądaniem resetowania hasła."""
     if current_user.is_authenticated:
         return redirect(url_for('index'))
     form = ResetPasswordRequestForm()
@@ -111,6 +117,7 @@ def reset_password_request():
 
 @app.route('/reset_password/<token>', methods=['GET', 'POST'])
 def reset_password(token):
+    """Funkcja wyświetlająca formularz resetowania hasła."""
     if current_user.is_authenticated:
         return redirect(url_for('index'))
     user = User.verify_reset_password_token(token)
@@ -128,6 +135,7 @@ def reset_password(token):
 @app.route('/user/<username>', methods=['GET'])
 @login_required
 def user(username):
+    """Funkcja wyświetlająca profil użytkownika."""
     user = User.query.filter_by(username=username).first_or_404()
     page = request.args.get('page', 1, type=int)
     posts = Post.query.filter_by(user_id=user.id).order_by(Post.timestamp.desc()).paginate(
@@ -143,6 +151,7 @@ def user(username):
 
 @app.before_request
 def before_request():
+    """Funkcja pobierająca czas lokalny użytkownika przed wykonaniem żadania."""
     if current_user.is_authenticated:
         current_user.last_seen = datetime.utcnow()
         db.session.commit()
@@ -152,6 +161,7 @@ def before_request():
 @app.route('/edit_profile', methods=['GET', 'POST'])
 @login_required
 def edit_profile():
+    """Funkcja wyświetlająca formularz edycji profilu."""
     form = EditProfileForm(current_user.username)
     if form.validate_on_submit():
         current_user.username = form.username.data
@@ -168,6 +178,7 @@ def edit_profile():
 @app.route('/follow/<username>')
 @login_required
 def follow(username):
+    """Funkcja pozwalająca na obserwowanie innych użytkowników."""
     user = User.query.filter_by(username=username).first()
     if user is None:
         flash(_('User %(username)s not found.', username=username))
@@ -184,6 +195,7 @@ def follow(username):
 @app.route('/unfollow/<username>')
 @login_required
 def unfollow(username):
+    """Funkcja pozwalająca na zaprzestanie obserwowania innych użytkowników."""
     user = User.query.filter_by(username=username).first()
     if user is None:
         flash(_('User %(username)s not found.', username=username))
@@ -199,6 +211,7 @@ def unfollow(username):
 
 @app.route('/user/<username>/popup')
 def user_popup(username):
+    """Funkcja tworząca 'wyskakujące' okno z informacjami o użytkowniku po najechaniu kursorem na nazwę użytkownika."""
     user = User.query.filter_by(username=username).first_or_404()
     return render_template('user_popup.html', user=user)
 
@@ -206,6 +219,7 @@ def user_popup(username):
 @app.route('/send_message/<recipient>', methods=['GET', 'POST'])
 @login_required
 def send_message(recipient):
+    """Funkcja wyświetlająca formularz wysyłania wiadomości prywatnej."""
     user = User.query.filter_by(username=recipient).first_or_404()
     form = MessageForm()
     if form.validate_on_submit():
@@ -217,18 +231,24 @@ def send_message(recipient):
     return render_template('send_message.html', title=_('Send Message'), form=form, recipient=recipient)
 
 
+@app.route('/messages/<username>')
+@login_required
+def conversation(username):
+    """Funkcja wyświetlająca formularz otrzymanych wiadomości."""
+    current_user.last_message_read_time = datetime.utcnow()
+    db.session.commit()
+    form = MessageForm()
+    messages = (Message.query.filter(Message.sender_id == current_user.id)).\
+        union(Message.query.filter(Message.sender_id == db.session.query(User.id).filter(User.username == username))).\
+        order_by(Message.timestamp.desc())
+    return render_template('conversation.html', messages=messages.all(), form=form)
+
+
 @app.route('/messages')
 @login_required
 def messages():
+    """Funkcja wyświetlająca formularz otrzymanych wiadomości."""
     current_user.last_message_read_time = datetime.utcnow()
     db.session.commit()
-    page = request.args.get('page', 1, type=int)
-    messages = current_user.messages_received.order_by(
-        Message.timestamp.desc()).paginate(
-            page, app.config['POSTS_PER_PAGE'], False)
-    next_url = url_for('messages', page=messages.next_num) \
-        if messages.has_next else None
-    prev_url = url_for('messages', page=messages.prev_num) \
-        if messages.has_prev else None
-    return render_template('messages.html', messages=messages.items,
-                           next_url=next_url, prev_url=prev_url)
+    speakers = (db.session.query(User).distinct().filter(Message.recipient_id == current_user.id or Message.sender_id == current_user.id)).filter_by().all()
+    return render_template('messages.html', speakers=speakers)

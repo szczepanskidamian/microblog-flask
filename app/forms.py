@@ -6,6 +6,7 @@ from flask_babel import _, lazy_gettext as _l
 
 
 class LoginForm(FlaskForm):
+    """Formularz logowania użytkownika."""
     username = StringField(_l('Username'), validators=[DataRequired()])
     password = PasswordField(_l('Password'), validators=[DataRequired()])
     remember_me = BooleanField(_l('Remember Me'))
@@ -13,6 +14,7 @@ class LoginForm(FlaskForm):
 
 
 class RegistrationForm(FlaskForm):
+    """Formularz rejestracji użytkownika."""
     username = StringField(_l('Username'), validators=[DataRequired()])
     email = StringField(_l('Email'), validators=[DataRequired(), Email()])
     password = PasswordField(_l('Password'), validators=[DataRequired()])
@@ -21,22 +23,26 @@ class RegistrationForm(FlaskForm):
     submit = SubmitField(_l('Register'))
 
     def validate_username(self, username):
+        """Walidacja nazwy użytkownika."""
         user = User.query.filter_by(username=username.data).first()
         if user is not None:
             raise ValidationError(_('Please use a different username.'))
 
     def validate_email(self, email):
+        """Walidacja adersu e-mail użytkownika."""
         user = User.query.filter_by(email=email.data).first()
         if user is not None:
             raise ValidationError(_('Please use a different email address.'))
 
 
 class ResetPasswordRequestForm(FlaskForm):
+    """Formularz żądania resetowania haseł."""
     email = StringField(_l('Email'), validators=[DataRequired(), Email()])
     submit = SubmitField(_l('Request Password Reset'))
 
 
 class ResetPasswordForm(FlaskForm):
+    """Formularz resetowania haseł."""
     password = PasswordField(_l('Password'), validators=[DataRequired()])
     password2 = PasswordField(
         _l('Repeat Password'), validators=[DataRequired(), EqualTo('password')])
@@ -44,6 +50,7 @@ class ResetPasswordForm(FlaskForm):
 
 
 class EditProfileForm(FlaskForm):
+    """Formularz edycji profilu użytkownika."""
     username = StringField(_l('Username'), validators=[DataRequired()])
     about_me = TextAreaField(_l('About me'), validators=[Length(min=0, max=200)])
     submit = SubmitField(_l('Submit'))
@@ -53,6 +60,7 @@ class EditProfileForm(FlaskForm):
         self.original_username = original_username
 
     def validate_username(self, username):
+        """Walidacja nowej nazwy użytkownika."""
         if username.data != self.original_username:
             user = User.query.filter_by(username=self.username.data).first()
             if user is not None:
@@ -60,10 +68,12 @@ class EditProfileForm(FlaskForm):
 
 
 class PostForm(FlaskForm):
+    """Formularz wstawiania postów."""
     post = TextAreaField(_l('Say something'), validators=[DataRequired(), Length(min=1, max=140)])
     submit = SubmitField(_l('Submit'))
 
 
 class MessageForm(FlaskForm):
+    """Formularz wiadomości prywatnych."""
     message = TextAreaField(_l('Message'), validators=[DataRequired(), Length(min=1, max=200)])
     submit = SubmitField(_l('Send'))

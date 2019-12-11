@@ -5,14 +5,14 @@ from app import app
 
 @app.cli.group()
 def translate():
-    """Translation and localization commands."""
+    """Komendy translacji i lokalizacji."""
     pass
 
 
 @translate.command()
 @click.argument('lang')
 def init(lang):
-    """Initialize a new language."""
+    """Dodanie nowego języka."""
     if os.system('pybabel extract -F babel.cfg -k _l -o messages.pot .'):
         raise RuntimeError('extract command failed')
     if os.system(
@@ -23,7 +23,7 @@ def init(lang):
 
 @translate.command()
 def update():
-    """Update all languages."""
+    """Aktualizacja wszystkich języków."""
     if os.system('pybabel extract -F babel.cfg -k _l -o messages.pot .'):
         raise RuntimeError('extract command failed')
     if os.system('pybabel update -i messages.pot -d app/translations'):
@@ -33,6 +33,6 @@ def update():
 
 @translate.command()
 def compile():
-    """Compile all languages."""
+    """Kompilacja wszystkich języków."""
     if os.system('pybabel compile -d app/translations'):
         raise RuntimeError('compile command failed')

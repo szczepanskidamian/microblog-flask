@@ -11,6 +11,7 @@ from config import Config
 from flask_mail import Mail
 from flask_babel import Babel, lazy_gettext as _l
 
+# Start aplikacji.
 
 app = Flask(__name__)
 app.config.from_object(Config)
@@ -57,7 +58,8 @@ if not app.debug:
 
 @babel.localeselector
 def get_locale():
-    # return request.accept_languages.best_match(app.config['LANGUAGES'])
-    return 'en'
+    """Pobranie od użytkownika kraju pochodzenia w celu najlepszego dopasowania języka aplikacji."""
+    return request.accept_languages.best_match(app.config['LANGUAGES'])
+    # return 'en'
 
 from app import routes, models, errors

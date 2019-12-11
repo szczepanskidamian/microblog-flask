@@ -6,10 +6,12 @@ from flask_babel import _
 
 
 def send_async_email(app, msg):
+    """Asynchroniczne wysyłanie wiadomości e-mail."""
     with app.app_context():
         mail.send(msg)
 
 def send_email(subject, sender, recipients, text_body, html_body):
+    """Tworzenie wątku odpowiedzialnego za wysłanie pojedynczej wiadomości."""
     msg = Message(subject, sender=sender, recipients=recipients)
     msg.body = text_body
     msg.html = html_body
@@ -17,6 +19,7 @@ def send_email(subject, sender, recipients, text_body, html_body):
 
 
 def send_password_reset_email(user):
+    """Wysłanie wiadomości e-mail z funkcją resetowania hasła."""
     token = user.get_reset_password_token()
     send_email(_('[Microblog] Reset Your Password'),
                sender=app.config['ADMINS'][0],
