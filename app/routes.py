@@ -231,19 +231,24 @@ def send_message(recipient):
     return render_template('send_message.html', title=_('Send Message'), form=form, recipient=recipient)
 
 
+@app.route('/messages/<username>')
+@login_required
+def conversation(username):
+    """Funkcja wyświetlająca formularz otrzymanych wiadomości."""
+    current_user.last_message_read_time = datetime.utcnow()
+    db.session.commit()
+    form = MessageForm()
+    messages = (Message.query.filter(Message.sender_id == current_user.id)).\
+        union(Message.query.filter(Message.sender_id == db.session.query(User.id).filter(User.username == username))).\
+        order_by(Message.timestamp.desc())
+    return render_template('conversation.html', messages=messages.all(), form=form)
+
+
 @app.route('/messages')
 @login_required
 def messages():
     """Funkcja wyświetlająca formularz otrzymanych wiadomości."""
     current_user.last_message_read_time = datetime.utcnow()
     db.session.commit()
-    page = request.args.get('page', 1, type=int)
-    messages = current_user.messages_received.order_by(
-        Message.timestamp.desc()).paginate(
-            page, app.config['POSTS_PER_PAGE'], False)
-    next_url = url_for('messages', page=messages.next_num) \
-        if messages.has_next else None
-    prev_url = url_for('messages', page=messages.prev_num) \
-        if messages.has_prev else None
-    return render_template('messages.html', messages=messages.items,
-                           next_url=next_url, prev_url=prev_url)
+    speakers = (db.session.query(User).distinct().filter(Message.recipient_id == current_user.id or Message.sender_id == current_user.id)).filter_by().all()
+    return render_template('messages.html', speakers=speakers)

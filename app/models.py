@@ -5,6 +5,7 @@ from flask_login import UserMixin
 from werkzeug.security import generate_password_hash, check_password_hash
 from time import time
 import jwt
+import sqlalchemy
 
 # Tabela obserwujących użytkowników.
 
@@ -12,6 +13,13 @@ followers = db.Table(
     'followers',
     db.Column('follower_id', db.Integer, db.ForeignKey('user.id')),
     db.Column('followed_id', db.Integer, db.ForeignKey('user.id'))
+)
+
+
+msg = db.Table(
+    'msg',
+    db.Column('recipient_id', db.Integer, db.ForeignKey('user.id')),
+    db.Column('sender_id', db.Integer, db.ForeignKey('user.id')),
 )
 
 
@@ -33,6 +41,12 @@ class User(UserMixin, db.Model):
                                     backref='author', lazy='dynamic')
     messages_received = db.relationship('Message', foreign_keys='Message.recipient_id',
                                         backref='recipient', lazy='dynamic')
+    messages = db.relationship(
+        'Message', secondary=msg,
+        primaryjoin=(msg.c.recipient_id == id),
+        secondaryjoin=(msg.c.sender_id == id),
+        backref=db.backref('msg', lazy='dynamic'), lazy='dynamic')
+    typ = type(messages)
     last_message_read_time = db.Column(db.DateTime)
 
     def __repr__(self):
