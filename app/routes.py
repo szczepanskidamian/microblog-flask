@@ -257,8 +257,7 @@ def messages():
 @app.route('/edit_post/<post_id>', methods=['GET', 'POST'])
 @login_required
 def edit_post(post_id):
-    """Funkcja wyświetlająca formularz edycji postów."""
-    post_id = int(post_id)
+    """Funkcja wyświetlająca formularz edycji postów użytkownika."""
     post = Post.query.filter_by(id=post_id).all()
     form = EditPostForm()
     if form.validate_on_submit():
@@ -271,3 +270,11 @@ def edit_post(post_id):
     return render_template('edit_post.html', title=_('Edit Post'), form=form)
 
 
+@app.route('/delete_post/<post_id>')
+@login_required
+def delete_post(post_id):
+    """Funkcja służąca do usuwania postów użytkownika."""
+    post = Post.query.filter_by(id=post_id).first()
+    db.session.delete(post)
+    db.session.commit()
+    return redirect(url_for('index'))

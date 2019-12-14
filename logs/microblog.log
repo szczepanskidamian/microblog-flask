@@ -48,3 +48,5 @@ Traceback (most recent call last):
     <br>
 jinja2.exceptions.UndefinedError: 'print' is undefined
 2019-12-14 14:28:58,084 INFO: Microblog startup [in C:\Uczelnia\microblog\app\__init__.py:56]
+2019-12-14 19:08:46,919 INFO: Microblog startup [in C:\Uczelnia\microblog\app\__init__.py:59]
+2019-12-14 19:26:17,455 INFO: Microblog startup [in C:\Uczelnia\microblog\app\__init__.py:59]
