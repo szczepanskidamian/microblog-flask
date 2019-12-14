@@ -77,3 +77,9 @@ class MessageForm(FlaskForm):
     """Formularz wiadomości prywatnych."""
     message = TextAreaField(_l('Message'), validators=[DataRequired(), Length(min=1, max=200)])
     submit = SubmitField(_l('Send'))
+
+
+class EditPostForm(FlaskForm):
+    """Formularz edytowania postów."""
+    body = TextAreaField(_l('Say something'), validators=[Length(min=1, max=140)])
+    submit = SubmitField(_l('Submit'))

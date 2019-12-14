@@ -41,12 +41,6 @@ class User(UserMixin, db.Model):
                                     backref='author', lazy='dynamic')
     messages_received = db.relationship('Message', foreign_keys='Message.recipient_id',
                                         backref='recipient', lazy='dynamic')
-    messages = db.relationship(
-        'Message', secondary=msg,
-        primaryjoin=(msg.c.recipient_id == id),
-        secondaryjoin=(msg.c.sender_id == id),
-        backref=db.backref('msg', lazy='dynamic'), lazy='dynamic')
-    typ = type(messages)
     last_message_read_time = db.Column(db.DateTime)
 
     def __repr__(self):

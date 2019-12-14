@@ -10,11 +10,14 @@ from flask_moment import Moment
 from config import Config
 from flask_mail import Mail
 from flask_babel import Babel, lazy_gettext as _l
+from flask_wtf import CsrfProtect
 
-# Start aplikacji.
+
+csrf = CsrfProtect()
 
 app = Flask(__name__)
 app.config.from_object(Config)
+csrf.init_app(app)
 db = SQLAlchemy(app)
 migrate = Migrate(app, db)
 login = LoginManager(app)

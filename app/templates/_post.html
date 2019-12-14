@@ -15,6 +15,10 @@
                 {% endset %}
                 {{ _('%(username)s said %(when)s',
                     username=user_link, when=moment(post.timestamp).format('LLL')) }}
+                {% if current_user.username == post.author.username %}
+                <a href="{{ url_for('edit_post', post_id=post.id) }}"><object align="right">Edytuj</object>
+                </a>
+                {% endif %}
                 <br>
                 {{ post.body }}
             </td>

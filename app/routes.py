@@ -1,6 +1,6 @@
 from flask import render_template, redirect, flash, url_for, request, g
 from app import app, db
-from app.forms import LoginForm, RegistrationForm, EditProfileForm, PostForm, ResetPasswordRequestForm, ResetPasswordForm, MessageForm
+from app.forms import LoginForm, RegistrationForm, EditProfileForm, PostForm, ResetPasswordRequestForm, ResetPasswordForm, MessageForm, EditPostForm
 from flask_login import current_user, login_user, logout_user, login_required
 from werkzeug.urls import url_parse
 from app.models import User, Post, Message
@@ -234,7 +234,7 @@ def send_message(recipient):
 @app.route('/messages/<username>')
 @login_required
 def conversation(username):
-    """Funkcja wyświetlająca formularz otrzymanych wiadomości."""
+    """Funkcja wyświetlająca formularz wymienionych wiadomości z danym użytkownikiem."""
     current_user.last_message_read_time = datetime.utcnow()
     db.session.commit()
     form = MessageForm()
@@ -247,8 +247,27 @@ def conversation(username):
 @app.route('/messages')
 @login_required
 def messages():
-    """Funkcja wyświetlająca formularz otrzymanych wiadomości."""
+    """Funkcja wyświetlająca konwersacje użytkownika, w których bierze udział."""
     current_user.last_message_read_time = datetime.utcnow()
     db.session.commit()
     speakers = (db.session.query(User).distinct().filter(Message.recipient_id == current_user.id or Message.sender_id == current_user.id)).filter_by().all()
     return render_template('messages.html', speakers=speakers)
+
+
+@app.route('/edit_post/<post_id>', methods=['GET', 'POST'])
+@login_required
+def edit_post(post_id):
+    """Funkcja wyświetlająca formularz edycji postów."""
+    post_id = int(post_id)
+    post = Post.query.filter_by(id=post_id).all()
+    form = EditPostForm()
+    if form.validate_on_submit():
+        post[0].body = form.body.data
+        db.session.commit()
+        flash(_('Your changes have been saved!'))
+        return redirect(url_for('index'))
+    elif request.method == 'GET':
+        form.body.data = post[0].body
+    return render_template('edit_post.html', title=_('Edit Post'), form=form)
+
+
