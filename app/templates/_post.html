@@ -2,7 +2,7 @@
         <tr>
             <td width="30px">
                 <a href="{{ url_for('user', username=post.author.username) }}">
-                    <img src="{{ post.author.avatar(30) }}" />
+                    <img src="{{ post.author.avatar(30, post.author.avatar_url) }}"  width="30" height="30"/>
                 </a>
             </td>
             <td>

@@ -42,6 +42,7 @@ class User(UserMixin, db.Model):
     messages_received = db.relationship('Message', foreign_keys='Message.recipient_id',
                                         backref='recipient', lazy='dynamic')
     last_message_read_time = db.Column(db.DateTime)
+    avatar_url = db.Column(db.String(200))
 
     def __repr__(self):
         """Wyświetlenie nazwy użytkownika."""
@@ -55,11 +56,15 @@ class User(UserMixin, db.Model):
         """Walidacja hasła użytkownika podczas logowania."""
         return check_password_hash(self.password_hash, password)
 
-    def avatar(self, size):
+    def avatar(self, size, url=''):
         """Wygenerowanie avataru na podstawie adresu email użytkownika przy użyciu serwisu gravatar.com."""
         digest = md5(self.email.lower().encode('utf-8')).hexdigest()
-        return 'https://www.gravatar.com/avatar/{}?d=identicon&s={}'.format(
-            digest, size)
+        self.avatar_url = url
+        if self.avatar_url:
+            return self.avatar_url
+        else:
+            return 'https://www.gravatar.com/avatar/{}?d=identicon&s={}'.format(
+                digest, size)
 
     def follow(self, user):
         """Funkcjonalność obserwowania użytkowników."""

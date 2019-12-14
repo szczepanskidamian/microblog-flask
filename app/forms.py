@@ -53,6 +53,7 @@ class EditProfileForm(FlaskForm):
     """Formularz edycji profilu użytkownika."""
     username = StringField(_l('Username'), validators=[DataRequired()])
     about_me = TextAreaField(_l('About me'), validators=[Length(min=0, max=200)])
+    avatar = StringField(('URL do grafiki'), validators=[Length(min=0, max=200)])
     submit = SubmitField(_l('Submit'))
 
     def __init__(self, original_username, *args, **kwargs):
